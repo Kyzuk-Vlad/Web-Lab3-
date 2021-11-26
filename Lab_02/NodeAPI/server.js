@@ -16,7 +16,7 @@ app.get('/api/articles', function(req, res) {
         } else {
             res.statusCode = 500;
             log.error('Internal error(%d): %s',
-                res.statusCode, err.message);
+            res.statusCode, err.message);
             return res.send({ error: 'Server error' });
         }
     });
@@ -108,7 +108,7 @@ app.delete('/api/articles/:id', function(req, res) {
             } else {
                 res.statusCode = 500;
                 log.error('Internal error(%d): %s',
-                    res.statusCode, err.message);
+                res.statusCode, err.message);
                 return res.send({ error: 'Server error' });
             }
         });
