@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var log = require('./libs/log')(module);
 var config = require('./libs/config');
-
 var log = require('./libs/log')(module);
 
 app.use(express.json());
@@ -15,8 +14,7 @@ app.get('/api/articles', function(req, res) {
             return res.send(articles);
         } else {
             res.statusCode = 500;
-            log.error('Internal error(%d): %s',
-            res.statusCode, err.message);
+            log.error('Internal error(%d): %s',res.statusCode, err.message);
             return res.send({ error: 'Server error' });
         }
     });
@@ -41,7 +39,8 @@ app.post('/api/articles', function(req, res) {
             if (err.name == 'ValidationError') {
                 res.statusCode = 400;
                 res.send({ error: 'Validation error' });
-            } else {
+            }
+            else {
                 res.statusCode = 500;
                 res.send({ error: 'Server error' });
             }
@@ -58,7 +57,8 @@ app.get('/api/articles/:id', function(req, res) {
         }
         if (!err) {
             return res.send({ status: 'OK', article: article });
-        } else {
+        }
+        else {
             res.statusCode = 500;
             log.error('Internal error(%d): %s', res.statusCode, err.message);
             return res.send({ error: 'Server error' });
@@ -80,16 +80,17 @@ app.put('/api/articles/:id', function(req, res) {
             if (!err) {
                 log.info("article updated");
                 return res.send({ status: 'OK', article: article });
-            } else {
+            }
+            else {
                 if (err.name == 'ValidationError') {
                     res.statusCode = 400;
                     res.send({ error: 'Validation error' });
-                } else {
+                }
+                else {
                     res.statusCode = 500;
                     res.send({ error: 'Server error' });
                 }
-                log.error('Internal error(%d): %s',
-                    res.statusCode, err.message);
+                log.error('Internal error(%d): %s', res.statusCode, err.message);
             }
         });
     });
@@ -107,8 +108,7 @@ app.delete('/api/articles/:id', function(req, res) {
                 return res.send({ status: 'OK' });
             } else {
                 res.statusCode = 500;
-                log.error('Internal error(%d): %s',
-                res.statusCode, err.message);
+                log.error('Internal error(%d): %s', res.statusCode, err.message);
                 return res.send({ error: 'Server error' });
             }
         });
